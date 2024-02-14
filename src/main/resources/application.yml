@@ -1,0 +1,31 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@mongo:27017/booking?authSource=admin
+      host: mongo
+      port: 6379
+  jpa:
+    generate-ddl: true
+    open-in-view: true
+  datasource:
+    url: jdbc:postgresql://postgres:5432/booking
+    username: postgres
+    password: postgres
+    hikari:
+      schema: booking
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS booking
+      connection-timeout: 10000
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
+app:
+  kafka:
+    kafkaUserTopic: "user-topic"
+    kafkaUserGroupId: "kafka-user-group-id"
+    kafkaBookingTopic: "booking-topic"
+    kafkaBookingGroupId: "kafka-booking-group-id"
+  statistics:
+    fileNameUserStat: "user-statistics.csv"
+    fileNameBookingStat: "booking-statistics.csv"
+    fileNameAllStat: "all-statistics.csv"
