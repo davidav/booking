@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @PagesFilterValid
-public class PagesRequest {
+public class PagesRq {
 
     private Integer pageSize;
     private Integer pageNumber;

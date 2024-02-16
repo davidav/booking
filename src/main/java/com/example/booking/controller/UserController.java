@@ -1,17 +1,12 @@
 package com.example.booking.controller;
 
-import com.example.booking.dto.mapper.UserMapper;
-import com.example.booking.dto.user.UserRequest;
-import com.example.booking.dto.user.UserResponse;
-import com.example.booking.entity.Role;
+import com.example.booking.dto.user.UserRq;
+import com.example.booking.dto.user.UserRs;
 import com.example.booking.entity.RoleType;
-import com.example.booking.entity.User;
 import com.example.booking.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,40 +17,29 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    private final UserMapper userMapper;
-
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
-
-        return ResponseEntity.ok(
-                userMapper.userToResponse(userService.findById(id)));
+    public UserRs findById(@PathVariable Long id) {
+        return userService.findByIdRs(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UserResponse> create(@RequestParam RoleType roleType, @RequestBody @Valid UserRequest request) {
+    public UserRs create(@RequestParam RoleType roleType, @RequestBody @Valid UserRq request) {
         log.info("UserController -> create roleType={} request={}", roleType, request);
-
-        User newUser = userService.save(userMapper.requestToUser(request), Role.from(roleType));
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(userMapper.userToResponse(newUser));
+        return userService.save(request, roleType);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody  @Valid UserRequest request) {
-        User updateUser = userService.update(userMapper.requestToUser(id, request));
-
-        return ResponseEntity.ok(userMapper.userToResponse(updateUser));
+    public UserRs update(@PathVariable Long id, @RequestBody  @Valid UserRq request) {
+        return userService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
-
-        return ResponseEntity.noContent().build();
     }
 
 }

@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 @Data
 @NoArgsConstructor
-public class RoomListResponse {
+public class RoomListRs {
 
-    private List<RoomResponse> rooms;
+    private List<RoomRs> rooms;
 
 }

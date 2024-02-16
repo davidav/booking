@@ -1,6 +1,5 @@
 package com.example.booking.dto.user;
 
-import com.example.booking.entity.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class UserRq {
 
-    private Long id;
     private String username;
+    private String password;
     private String email;
-    private String role;
 
 }

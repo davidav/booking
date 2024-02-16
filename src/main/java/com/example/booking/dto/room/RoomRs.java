@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomResponse {
+public class RoomRs {
 
     private Long id;
     private String name;

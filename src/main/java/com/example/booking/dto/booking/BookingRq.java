@@ -10,7 +10,7 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingRequest {
+public class BookingRq {
 
     private Instant arrival;
     private Instant departure;

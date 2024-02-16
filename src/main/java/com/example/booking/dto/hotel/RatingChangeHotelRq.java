@@ -1,18 +1,17 @@
-package com.example.booking.dto.booking;
+package com.example.booking.dto.hotel;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingListResponse {
+public class RatingChangeHotelRq {
 
-    private List<BookingResponse> bookings;
+    private Long hotelId;
+    private Double newMark;
 
 }

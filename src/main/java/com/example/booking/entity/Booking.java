@@ -35,4 +35,11 @@ public class Booking {
     @ToString.Exclude
     private User user;
 
+    public Long getRoomId(){
+        return room.getId();
+    }
+    public Long getUserId(){
+        return user.getId();
+    }
+
 }

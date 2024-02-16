@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class HotelListResponse {
+public class HotelListRs {
 
-    private List<HotelResponse> hotels;
+    private List<HotelRs> hotels;
 
 }

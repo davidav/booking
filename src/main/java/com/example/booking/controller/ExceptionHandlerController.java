@@ -1,7 +1,7 @@
 package com.example.booking.controller;
 
 
-import com.example.booking.dto.ErrorResponse;
+import com.example.booking.dto.ErrorRs;
 import com.example.booking.exception.BookingException;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.tomcat.websocket.AuthenticationException;
@@ -19,13 +19,13 @@ import java.util.List;
 public class ExceptionHandlerController {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ErrorResponse> notFound(EntityNotFoundException ex){
+    public ResponseEntity<ErrorRs> notFound(EntityNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponse(ex.getMessage()));
+                .body(new ErrorRs(ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> notValid(MethodArgumentNotValidException ex){
+    public ResponseEntity<ErrorRs> notValid(MethodArgumentNotValidException ex){
         BindingResult bindingResult = ex.getBindingResult();
         List<String> errorMessages = bindingResult.getAllErrors()
                 .stream()
@@ -34,25 +34,25 @@ public class ExceptionHandlerController {
         String errorMessage = String.join("; ", errorMessages);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponse(errorMessage));
+                .body(new ErrorRs(errorMessage));
     }
 
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ErrorResponse> noAuthentication(AuthenticationException ex){
+    public ResponseEntity<ErrorRs> noAuthentication(AuthenticationException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                new ErrorResponse(ex.getMessage()));
+                new ErrorRs(ex.getMessage()));
     }
 
     @ExceptionHandler(BookingException.class)
-    public ResponseEntity<ErrorResponse> noBooking(BookingException ex){
+    public ResponseEntity<ErrorRs> noBooking(BookingException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(
-                new ErrorResponse(ex.getMessage()));
+                new ErrorRs(ex.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> unhandledErrors(Exception ex){
+    public ResponseEntity<ErrorRs> unhandledErrors(Exception ex){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                new ErrorResponse(ex.getMessage()));
+                new ErrorRs(ex.getMessage()));
     }
 
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomRequest {
+public class RoomRq {
 
     private String name;
     private String description;
