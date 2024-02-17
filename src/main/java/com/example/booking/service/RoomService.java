@@ -14,11 +14,14 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RoomService{
+public class RoomService {
 
     private final RoomMapper roomMapper;
     private final RoomRepository roomRepository;
@@ -49,9 +52,10 @@ public class RoomService{
     }
 
     public RoomListRs filterBy(RoomFilter filter) {
-        return roomMapper.roomListToRoomListResponse(roomRepository.findAll(
-                RoomSpecification.withFilter(filter),
-                PageRequest.of(filter.getPageNumber(), filter.getPageSize())).getContent());
+        Specification<Room> spec = RoomSpecification.withFilter(filter);
+        PageRequest pageable = PageRequest.of(filter.getPageNumber(), filter.getPageSize());
+        List<Room> content = roomRepository.findAll( spec, pageable).getContent();
+        return roomMapper.roomListToRoomListResponse(content);
     }
 
 }

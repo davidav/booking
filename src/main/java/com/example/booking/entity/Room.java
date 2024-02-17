@@ -43,4 +43,8 @@ public class Room {
         reserves.add(reserve);
     }
 
+    public Long getHotelId(){
+        return hotel.getId();
+    }
+
 }

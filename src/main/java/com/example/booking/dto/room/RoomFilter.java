@@ -1,6 +1,5 @@
 package com.example.booking.dto.room;
 
-import com.example.booking.validation.PagesFilterValid;
 import com.example.booking.validation.RoomFilterValid;
 import lombok.Data;
 import lombok.NoArgsConstructor;

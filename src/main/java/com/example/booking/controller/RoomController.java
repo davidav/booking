@@ -51,7 +51,8 @@ public class RoomController {
     @PreAuthorize(value = "hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     public RoomListRs findAllByFilter(@Valid RoomFilter filter) {
         log.info("RoomController -> findAllByFilter {}", filter);
-        return roomService.filterBy(filter);
+        RoomListRs roomListRs = roomService.filterBy(filter);
+        return roomListRs;
     }
 
 }

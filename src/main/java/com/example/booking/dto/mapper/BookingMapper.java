@@ -5,7 +5,6 @@ import com.example.booking.dto.booking.BookingRq;
 import com.example.booking.dto.booking.BookingRs;
 import com.example.booking.entity.Booking;
 import com.example.booking.entity.Reserve;
-import com.example.booking.service.BookingService;
 import com.example.booking.service.RoomService;
 import com.example.booking.statistics.model.BookingStatistic;
 import org.mapstruct.Mapper;
@@ -29,15 +28,13 @@ public abstract class BookingMapper {
                         .map(this::bookingToResponse)
                         .collect(Collectors.toList()));
         return response;
-
     }
 
     @Mapping(target = "roomId", expression = "java(booking.getRoomId())")
     @Mapping(target = "userId", expression = "java(booking.getUserId())")
     public abstract BookingRs bookingToResponse(Booking booking);
 
-    @Mapping(target = "room",
-            expression = "java( roomService.findById(request.getRoomId()))")
+    @Mapping(target = "room", expression = "java(roomService.findById(request.getRoomId()))")
     public abstract Booking requestToBooking(BookingRq request);
 
     @Mapping(target = "fromDate", source = "arrival")
