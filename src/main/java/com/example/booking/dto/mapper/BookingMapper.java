@@ -6,7 +6,7 @@ import com.example.booking.dto.booking.BookingRs;
 import com.example.booking.entity.Booking;
 import com.example.booking.entity.Reserve;
 import com.example.booking.service.RoomService;
-import com.example.booking.statistics.model.BookingStatistic;
+import com.example.booking.entity.BookingStatistic;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

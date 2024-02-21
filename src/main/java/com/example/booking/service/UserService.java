@@ -8,7 +8,7 @@ import com.example.booking.entity.Role;
 import com.example.booking.entity.RoleType;
 import com.example.booking.entity.User;
 import com.example.booking.repo.UserRepository;
-import com.example.booking.statistics.model.UserStatistic;
+import com.example.booking.entity.UserStatistic;
 import com.example.booking.util.AppHelperUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -70,7 +71,9 @@ public class UserService {
 
     public UserRs update(Long id, UserRq rq) {
         User existedUser = findById(id);
+        List<Role> roles = existedUser.getRoles();
         AppHelperUtils.copyNonNullProperties(userMapper.requestToUser(rq), existedUser);
+        existedUser.setRoles(roles);
         return userMapper.userToResponse(userRepository.save(existedUser));
     }
 

@@ -25,15 +25,15 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public UserRs create(@RequestParam RoleType roleType, @RequestBody @Valid UserRq request) {
-        log.info("UserController -> create roleType={} request={}", roleType, request);
-        return userService.save(request, roleType);
+    public UserRs create(@RequestParam RoleType roleType, @RequestBody @Valid UserRq rq) {
+        log.info("UserController -> create roleType={} request={}", roleType, rq);
+        return userService.save(rq, roleType);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public UserRs update(@PathVariable Long id, @RequestBody  @Valid UserRq request) {
-        return userService.update(id, request);
+    public UserRs update(@PathVariable Long id, @RequestBody  @Valid UserRq rq) {
+        return userService.update(id, rq);
     }
 
     @DeleteMapping("/{id}")

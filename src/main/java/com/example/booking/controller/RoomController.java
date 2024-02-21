@@ -28,16 +28,16 @@ public class RoomController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public RoomRs create(@RequestBody @Valid RoomRq request) {
-        log.info("RoomController -> create {}", request.getName());
-        return roomService.save(request);
+    public RoomRs create(@RequestBody @Valid RoomRq rq) {
+        log.info("RoomController -> create {}", rq.getName());
+        return roomService.save(rq);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public RoomRs update(@PathVariable Long id, @RequestBody RoomRq request) {
-        log.info("RoomController -> update id={} request={}", id, request);
-        return roomService.update(id, request);
+    public RoomRs update(@PathVariable Long id, @RequestBody RoomRq rq) {
+        log.info("RoomController -> update id={} request={}", id, rq);
+        return roomService.update(id, rq);
     }
 
     @DeleteMapping("/{id}")
@@ -51,8 +51,7 @@ public class RoomController {
     @PreAuthorize(value = "hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     public RoomListRs findAllByFilter(@Valid RoomFilter filter) {
         log.info("RoomController -> findAllByFilter {}", filter);
-        RoomListRs roomListRs = roomService.filterBy(filter);
-        return roomListRs;
+        return roomService.filterBy(filter);
     }
 
 }

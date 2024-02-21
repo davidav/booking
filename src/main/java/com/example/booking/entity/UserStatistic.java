@@ -1,4 +1,4 @@
-package com.example.booking.statistics.model;
+package com.example.booking.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,5 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document(collection = "user")
 public class UserStatistic {
+
     private Long userId;
 }

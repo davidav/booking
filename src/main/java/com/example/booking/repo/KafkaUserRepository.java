@@ -1,6 +1,6 @@
-package com.example.booking.statistics.repo;
+package com.example.booking.repo;
 
-import com.example.booking.statistics.model.UserStatistic;
+import com.example.booking.entity.UserStatistic;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

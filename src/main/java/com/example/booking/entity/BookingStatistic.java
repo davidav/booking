@@ -1,4 +1,4 @@
-package com.example.booking.statistics.model;
+package com.example.booking.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,8 @@
 package com.example.booking.config;
 
 
-import com.example.booking.statistics.model.BookingStatistic;
-import com.example.booking.statistics.model.UserStatistic;
+import com.example.booking.entity.BookingStatistic;
+import com.example.booking.entity.UserStatistic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;

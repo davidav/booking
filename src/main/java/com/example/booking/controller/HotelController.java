@@ -21,9 +21,9 @@ public class HotelController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public HotelListRs findAll(@Valid PagesRq request) {
+    public HotelListRs findAll(@Valid PagesRq rq) {
         log.info("HotelController -> findAll");
-        return hotelService.findAll(request);
+        return hotelService.findAll(rq);
     }
 
 
@@ -36,16 +36,16 @@ public class HotelController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public HotelRs create(@RequestBody @Valid HotelRq request) {
-        log.info("HotelController -> create {}", request);
-        return hotelService.save(request);
+    public HotelRs create(@RequestBody @Valid HotelRq rq) {
+        log.info("HotelController -> create {}", rq);
+        return hotelService.save(rq);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public HotelRs update(@PathVariable Long id, @RequestBody @Valid HotelRq request) {
+    public HotelRs update(@PathVariable Long id, @RequestBody @Valid HotelRq rq) {
         log.info("HotelController -> update hotel with id={}", id);
-        return hotelService.update( id, request);
+        return hotelService.update( id, rq);
     }
 
     @DeleteMapping("/{id}")
@@ -59,9 +59,9 @@ public class HotelController {
 
     @PostMapping("/rating")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public HotelRs changeRating(@RequestBody @Valid RatingChangeHotelRq request){
+    public HotelRs changeRating(@RequestBody @Valid RatingChangeHotelRq rq){
         log.info("HotelController -> changeRating");
-        return hotelService.changeRating(request);
+        return hotelService.changeRating(rq);
     }
 
     @GetMapping("/filter")

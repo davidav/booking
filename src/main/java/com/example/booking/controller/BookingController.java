@@ -28,10 +28,10 @@ public class BookingController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public BookingRs create(@RequestBody BookingRq request,
+    public BookingRs create(@RequestBody BookingRq rq,
                             @AuthenticationPrincipal UserDetails userDetails){
-        log.info("BookingController -> create {}", request);
-        return bookingService.save(request, userDetails);
+        log.info("BookingController -> create {}", rq);
+        return bookingService.save(rq, userDetails);
     }
 
     @DeleteMapping("/{id}")

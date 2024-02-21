@@ -31,4 +31,3 @@ app:
   statistics:
     fileNameUserStat: "user-statistics.csv"
     fileNameBookingStat: "booking-statistics.csv"
-    fileNameAllStat: "all-statistics.csv"

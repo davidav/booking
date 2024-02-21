@@ -11,7 +11,7 @@ import com.example.booking.entity.Room;
 import com.example.booking.exception.BookingException;
 import com.example.booking.repo.BookingRepository;
 import com.example.booking.repo.ReserveRepository;
-import com.example.booking.statistics.model.BookingStatistic;
+import com.example.booking.entity.BookingStatistic;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

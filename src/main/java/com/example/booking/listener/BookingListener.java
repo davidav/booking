@@ -1,7 +1,7 @@
-package com.example.booking.statistics.listener;
+package com.example.booking.listener;
 
-import com.example.booking.statistics.model.BookingStatistic;
-import com.example.booking.statistics.service.StatisticsServiceImpl;
+import com.example.booking.entity.BookingStatistic;
+import com.example.booking.service.StatisticsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class KafkaBookingListener {
+public class BookingListener {
 
-    private final StatisticsServiceImpl statisticsService;
+    private final StatisticsService statisticsService;
 
     @KafkaListener(topics = "${app.kafka.kafkaBookingTopic}",
             groupId = "${app.kafka.kafkaBookingGroupId}",

@@ -16,8 +16,8 @@ import org.slf4j.helpers.MessageFormatter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -55,7 +55,8 @@ public class RoomService {
         Specification<Room> spec = RoomSpecification.withFilter(filter);
         PageRequest pageable = PageRequest.of(filter.getPageNumber(), filter.getPageSize());
         List<Room> content = roomRepository.findAll( spec, pageable).getContent();
-        return roomMapper.roomListToRoomListResponse(content);
+        List<Room> rooms = content.stream().distinct().toList();
+        return roomMapper.roomListToRoomListResponse(rooms);
     }
 
 }

@@ -1,9 +1,8 @@
-package com.example.booking.statistics.controller;
+package com.example.booking.controller;
 
-import com.example.booking.statistics.model.AllStatistics;
-import com.example.booking.statistics.model.BookingStatistic;
-import com.example.booking.statistics.model.UserStatistic;
-import com.example.booking.statistics.service.StatisticsServiceImpl;
+import com.example.booking.entity.BookingStatistic;
+import com.example.booking.entity.UserStatistic;
+import com.example.booking.service.StatisticsService;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
@@ -24,7 +23,7 @@ import java.io.IOException;
 @RequestMapping("/api/v1/statistics")
 @RequiredArgsConstructor
 public class StatisticsController {
-    private final StatisticsServiceImpl statisticsService;
+    private final StatisticsService statisticsService;
 
     @Value("${app.statistics.fileNameUserStat}")
     private String fileNameUserStat;
@@ -32,21 +31,18 @@ public class StatisticsController {
     @Value("${app.statistics.fileNameBookingStat}")
     private String fileNameBookingStat;
 
-    @Value("${app.statistics.fileNameAllStat}")
-    private String fileNameAllStat;
-
     @GetMapping("/get-users")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void exportUsers(HttpServletResponse response) throws IOException,
+    public void exportUsers(HttpServletResponse rs) throws IOException,
             CsvRequiredFieldEmptyException,
             CsvDataTypeMismatchException {
 
-        response.setContentType("text/csv");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+        rs.setContentType("text/csv");
+        rs.setHeader(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + fileNameUserStat + "");
 
         StatefulBeanToCsv<UserStatistic> writer =
-                new StatefulBeanToCsvBuilder<UserStatistic>(response.getWriter())
+                new StatefulBeanToCsvBuilder<UserStatistic>(rs.getWriter())
                         .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                         .withOrderedResults(true)
                         .build();
@@ -56,16 +52,16 @@ public class StatisticsController {
 
     @GetMapping("/get-bookings")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void exportBookings(HttpServletResponse response) throws IOException,
+    public void exportBookings(HttpServletResponse rs) throws IOException,
             CsvRequiredFieldEmptyException,
             CsvDataTypeMismatchException {
 
-        response.setContentType("text/csv");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+        rs.setContentType("text/csv");
+        rs.setHeader(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + fileNameBookingStat + "");
 
         StatefulBeanToCsv<BookingStatistic> writer =
-                new StatefulBeanToCsvBuilder<BookingStatistic>(response.getWriter())
+                new StatefulBeanToCsvBuilder<BookingStatistic>(rs.getWriter())
                         .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                         .withOrderedResults(true)
                         .build();
@@ -73,24 +69,5 @@ public class StatisticsController {
         writer.write(statisticsService.getBookingStat());
 
     }
-
-        @GetMapping("/get-all")
-        @PreAuthorize("hasRole('ROLE_ADMIN')")
-        public void exportAll(HttpServletResponse response) throws IOException,
-                CsvRequiredFieldEmptyException,
-                CsvDataTypeMismatchException {
-
-            response.setContentType("text/csv");
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + fileNameAllStat + "");
-
-            StatefulBeanToCsv<AllStatistics> writer =
-                    new StatefulBeanToCsvBuilder<AllStatistics>(response.getWriter())
-                            .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
-                            .withOrderedResults(true)
-                            .build();
-
-            writer.write(statisticsService.getAllStat());
-        }
 
 }
